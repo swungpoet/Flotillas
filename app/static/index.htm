@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="es">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="Administración de flotillas">
+    <meta name="author" content="Edwin CRUZ" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Libreria de Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900italic' rel='stylesheet' type='text/css'>
+    <!--Hojas de estilos-->
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+    <link href="css/roundabout.css" rel="stylesheet" />
+    <link href="css/nodo.css" rel="stylesheet" />
+    <link href="css/search.css" rel="stylesheet" />
+    <link href="css/windows8.css" rel="stylesheet" />
+    <!--Loading-->
+    <link href="css/toastr.css" rel="stylesheet" />
+    <link href="css/angular-busy.css" rel="stylesheet" />
+    <!--Librearias JQuery y Bootstrap-->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.roundabout.js"></script>
+    <!-- Sidebar -->
+    <link rel="stylesheet" type="text/css" href="css/sidebar/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/sidebar/component.css" />
+    <link rel="stylesheet" type="text/css" href="css/sidebar/body.css" />
+    <script src="js/sidebar/modernizr.custom.js"></script>
+    <!-- Switch-->
+    <link rel="stylesheet" type="text/css" href="css/switch/bootstrap-switch.min.css" />
+    <script src="js/switch/bootstrap-switch.min.js"></script>
+    <!-- Datepicker -->
+    <link rel="stylesheet" type="text/css" href="css/datepicker/datepicker3.css" />
+    <script src="js/datepicker/bootstrap-datepicker.js"></script>
+    <base href='/'>
+    <!-- c3 Charts -->
+    <link href="css/inspinia/c3/c3.min.css" rel="stylesheet">
+</head>
+
+<body ng-app="registrationModule">
+    <div id="st-trigger-effects" class="column" ng-hide="empleado == null" ng-controller="headerController" ng-init="init()">
+        <nav class="navbar navbar-default navHeader">
+            <!-- Inicia NAV bar -->
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Navegador</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><span class="blanco">Administración de Flotillas</span></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown" id="mnuAvatar">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="blanco userName"> {{ empleado.nombreCompleto + ' - ' +  empleado.rol }} </span>
+                                <img src="image/profile/man.jpg" id="avatar">
+                                <span class="caret blanco"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="seleccionable"><a href="/reporte">Reporte Sincronización</a></li>
+                                <li class="seleccionable"><a href="/reportedocumentos">Reporte Documentos</a></li>
+                                <li class="seleccionable"><a ng-click="Salir()">Salir</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </div>
+    <div ng-view></div>
+    <script type="text/javascript">
+    var nameDocument = '';
+
+    function refresh() {
+        var scope = angular.element($("#modalUpload")).scope();
+        scope.$apply(function() {
+            scope.FinishUpload(nameDocument);
+        })
+    }
+
+    function setName(name) {
+        nameDocument = name;
+    }
+
+    function getName() {
+        return nameDocument;
+    }
+    </script>
+    <!-- Ventana modal de carga -->
+    <!-- Modal -->
+    <div class="modal fade" id="modalUpload" ng-controller="nodoController">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Cargar Documento</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe id="frameUpload" frameborder="0"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Interface de usuario-->
+    <script src="js/toastr.min.js"></script>
+    <!-- Librerias Angular-->
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="js/angular-local-storage.min.js"></script>
+    <!--Funciones Comunes-->
+    <script src="confront.js"></script>
+    <!--<script src="~/AngularJS/common.js"></script>-->
+    <!--Angular NG-Grid-->
+    <script src="js/ng-grid.js"></script>
+    <!--Angular Busy-->
+    <script src="js/angular-busy.js"></script>
+    <!--Librería para realizar querys-->
+    <script src="js/linq.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <!--Librerias de aplicación angular-->
+    <script src="AngularJS/RegistrationModule.js"></script>
+    <!--librerias de componenetes-->
+    <script src="AngularJS/alertFactory.js"></script>
+    <script src="AngularJS/Utils.js"></script>
+    <!--Quitar-->
+    <script src="tempData.js"></script>
+    <!--Quitar-->
+    <script src="helpers.js"></script>
+    <!--Controllers-->
+    <script src="AngularJS/Reporte/reporteRepository.js"></script>
+    <script src="AngularJS/Reporte/reporteController.js"></script>
+    <script src="AngularJS/Nodo/nodoRepository.js"></script>
+    <script src="AngularJS/Nodo/nodoController.js"></script>
+    <script src="AngularJS/RolPermiso/rolPermisoRepository.js"></script>
+    <script src="AngularJS/Rol/rolRepository.js"></script>
+    <script src="AngularJS/Login/loginRepository.js"></script>
+    <script src="AngularJS/Login/loginController.js"></script>
+    <script src="AngularJS/Unidad/unidadRepository.js"></script>
+    <script src="AngularJS/Header/headerController.js"></script>
+    <script src="AngularJS/Activacion/activacionRepository.js"></script>
+    <script src="AngularJS/Activacion/activacionController.js"></script>
+    <script src="AngularJS/Busqueda/busquedaController.js"></script>
+    <script src="AngularJS/Busqueda/busquedaRepository.js"></script>
+    <script src="AngularJS/Documento/documentoRepository.js"></script>
+    <script src="AngularJS/Reporte/reporteDocumentoController.js"></script>
+    <!--Sidebars-->
+    <script src="js/sidebar/classie.js"></script>
+    <script src="js/sidebar/sidebarEffects.js"></script>
+    <!-- Inspinia -->
+    <script src="js/inspinia/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/inspinia/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- d3 and c3 charts -->
+    <script src="js/inspinia/d3/d3.min.js"></script>
+    <script src="js/inspinia/c3/c3.min.js"></script>
+</body>
+
+</html>

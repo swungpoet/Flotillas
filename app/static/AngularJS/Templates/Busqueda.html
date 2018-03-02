@@ -1,0 +1,123 @@
+<link rel="stylesheet" type="text/css" href="../../css/busqueda.css" />
+<div cg-busy="myPromise" ng-init="init()" class="container">
+    <header>
+        <h1>Búsqueda de <span> Unidad </span></h1>
+    </header>
+    <section id="image">
+        <img id="imageLogo" src="image/logo/integra.png">
+    </section>
+    <div id="contenedor">
+        <!-- <form class="form-horizontal" role="form"> -->
+        <!-- ng-controller="busquedaController"    PREGUNTAR POR QUE ESTA AHI  -->
+        <!-- <div class="form-group" >
+                <label for="licitacion" class="col-md-2 control-label">Licitación</label>
+                <div class="col-md-2">
+                    <select  class="form-control" ng-model="licitacion" ng-options="cliente.idLicitacion as cliente.descripcion for cliente in clientes" name="txtTipoContrato">
+                        <option value="">Seleccionar cliente</option> -->
+        <!--default option -->
+        <!-- </select> 
+                </div>
+            </div>
+            <div class="form-group" ng-init="factura = factura2">
+                <label for="facturaL" class="col-md-2 control-label">Factura</label>
+                <div class="col-md-2">
+                    <input id="txtFactura" type="text" class="form-control" ng-model="factura">
+                </div>
+            </div>
+            <div class="form-group" ng-init="vin = vin2">
+                <label for="vinL" class="col-md-2 control-label">VIN</label>
+                <div class="col-md-2">
+                    <input id="txtVIN" type="text" class="form-control" ng-model="vin">
+                </div>
+            </div>
+            <button type="button" class="btn btn-info btnBuscar" ng-click="BuscarFlotilla(factura,vin)" id="btnBuscar" data-loading-text="Buscando...">Buscar</button>
+        </form> -->
+        <br>
+        <br>
+        <form class="form" role="form">
+            <!-- ng-controller="busquedaController"    PREGUNTAR POR QUE ESTA AHI  -->
+            <div class="form-group">
+                <label for="licitacion" class="col-md-1 control-label">Licitación</label>
+                <div class="col-md-2">
+                    <select class="form-control" ng-model="licitacion" ng-options="cliente.idLicitacion as cliente.descripcion for cliente in clientes" name="txtTipoContrato" id="txtLicitacion">
+                        <!--ng-disabled="((factura != '' || vin != '') ? false : true)"-->
+                        <option value="">Seleccionar cliente</option>
+                        <!--default option -->
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" ng-init="vin = vin2">
+                <label for="vinL" class="col-md-1 control-label">VIN</label>
+                <div class="col-md-3">
+                    <input id="txtVIN" type="text" class="form-control" ng-model="vin" ng-disabled="(factura != '' && factura != undefined && factura != null ? true : false)">
+                </div>
+            </div>
+            <div class="form-group" ng-init="factura = factura2">
+                <label for="facturaL" class="col-md-1 control-label">Factura</label>
+                <div class="col-md-3">
+                    <input id="txtFactura" type="text" class="form-control" ng-model="factura" ng-disabled="(vin != '' && vin != undefined && vin != null ? true : false)">
+                </div>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-info btnBuscar pull-right" ng-click="BuscarFlotilla(factura,vin,licitacion)" id="btnBuscar" data-loading-text="Buscando...">Buscar</button>
+            </div>
+        </form>
+        <div class="col-md-12">
+            <br>
+            <br>
+            <br>
+        </div>
+        <!-- <form>
+          <div class="form-group" >
+                <label for="licitacion" class="col-md-2 control-label">Licitación {{clientes[1].descripcion}}</label>
+                <div class="col-md-2">
+                    <select  class="form-control" ng-model="licitacion" ng-options="cliente.idLicitacion as cliente.descripcion for cliente in clientes" name="txtTipoContrato">
+                        <option value="">Seleccionar cliente</option>
+                    </select> 
+                </div>
+            </div>
+        </form>
+ -->
+        <div class="row tablaBusqueda tablaAlign">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>VIN</th>
+                        <th>Serie Motor</th>
+                        <th>Licitación</th>
+                        <th>Factura</th>
+                        <th>Descripción</th>
+                        <th>Estatus</th>
+                        <th>Progreso</th>
+                        <th>Ver</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="unidad in listaUnidades">
+                        <td>{{ unidad.idLicitacion }}</td>
+                        <td>{{ unidad.vin }}</td>
+                        <td>{{unidad.numeroMotor}}</td>
+                        <td>{{unidad.licitacion}}</td>
+                        <td>{{ unidad.factura }}</td>
+                        <td>{{ unidad.descripcion }}</td>
+                        <td>{{ unidad.estatus }} </td>
+                        <td>
+                            <!-- - {{ unidad.progreso }}% -->
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ unidad.progreso }}%">
+                                    {{ unidad.subidos }}/{{ unidad.total }} - {{ unidad.progreso }}%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" type="button" id="btnEnviar" ng-click="EnviarUnidad(unidad)">
+                                <span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
