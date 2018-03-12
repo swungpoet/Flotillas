@@ -52,3 +52,28 @@
   color: #7cbcd6;
   text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.8);
 }
+
+#map {
+  visibility:hidden;
+  position:absolute;
+  padding:0px;
+  left:30%;
+  top:5%;
+  z-index:3;
+  background:#fff;
+  border:1px solid #000;
+  }
+
+  #btnCerrar {
+    visibility:hidden;
+    position:absolute;
+    padding:0px;
+    left:60%;
+    top:4%;
+    z-index:3;
+    border:1px solid blue;
+    }
+  
+
+
+  
