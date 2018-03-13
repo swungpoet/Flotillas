@@ -558,6 +558,16 @@
                     </div>
                     <!-- Inicia Cambios REXE-->
                     <div class="form-group row">
+                        <div ng-show="listaDocumentos[55].permiso == 1">
+                            <label for="recibidoPor" class="control-label col-md-2"> Teléfono: </label>
+                            <div class="col-md-2">
+                                <input type="text" ng-model="listaDocumentos[55].valor" class="form-control" ng-blur="Guardar(listaDocumentos[55].idDocumento, listaDocumentos[55].valor)">
+                                <div class="loader">
+                                    <div class="showCtrl" id="loader56"><img src="image/gif/arrows.gif" class="gifLoader" ng-show="listaDocumentos[55].valor != ''"></div>
+                                    <div id="ready56"><span class="glyphicon glyphicon-ok ready" data-toggle="popover" data-original-title="{{listaDocumentos[55].accion}}" data-content="{{listaDocumentos[55].nombreUsuario}} el {{listaDocumentos[55].fechaMod | date:'MM/dd/yyyy hh:mm:ss'}}" ng-hide="listaDocumentos[55].accion == null"></span></div>
+                                </div>
+                            </div>
+                        </div>
                         <div ng-show="listaDocumentos[54].permiso == 1">
                             <label for="recibidoPor" class="control-label col-md-2"> Entregado por: </label>
                             <div class="col-md-2">
@@ -568,13 +578,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div ng-show="listaDocumentos[55].permiso == 1">
-                            <label for="recibidoPor" class="control-label col-md-2"> Teléfono: </label>
+                        <div ng-show="listaDocumentos[17].permiso == 1">
+                            <label for="acuseE" class="control-label col-md-2">Acuse de entrega: </label>
                             <div class="col-md-2">
-                                <input type="text" ng-model="listaDocumentos[55].valor" class="form-control" ng-blur="Guardar(listaDocumentos[55].idDocumento, listaDocumentos[55].valor)">
-                                <div class="loader">
-                                    <div class="showCtrl" id="loader56"><img src="image/gif/arrows.gif" class="gifLoader" ng-show="listaDocumentos[55].valor != ''"></div>
-                                    <div id="ready56"><span class="glyphicon glyphicon-ok ready" data-toggle="popover" data-original-title="{{listaDocumentos[55].accion}}" data-content="{{listaDocumentos[55].nombreUsuario}} el {{listaDocumentos[55].fechaMod | date:'MM/dd/yyyy hh:mm:ss'}}" ng-hide="listaDocumentos[55].accion == null"></span></div>
+                                <button type="button" class="btn btn-default" ng-click="Cargar(listaDocumentos[17].idDocumento)" ng-hide="listaDocumentos.Verificacion == false" ng-show="listaDocumentos.Verificacion == true">
+                                    <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+                                </button>
+                                <button id="btnDoc18" type="button" ng-class="{ 'oculto': listaDocumentos[17].valor == ''}" class="btn btn-default" ng-click="VerDocumento(listaDocumentos[17].idDocumento,listaDocumentos[17].valor,null)">
+                                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                </button>
+                                <div class="alignArrow">
+                                    <div class="showCtrl" id="loader1"><img src="image/gif/arrows.gif" class="gifLoader"></div>
+                                    <div id="ready1"><span class="glyphicon glyphicon-ok ready" data-toggle="popover" data-original-title="{{listaDocumentos[17].accion}}" data-content="{{listaDocumentos[17].nombreUsuario}} el {{listaDocumentos[17].fechaMod | date:'MM/dd/yyyy hh:mm:ss'}}" ng-hide="listaDocumentos[17].accion == null"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -600,8 +615,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
                         <div ng-show="listaDocumentos[58].permiso == 1">
                             <label for="equipamiento" class="control-label col-sm-2">Carga Licencia: </label>
                             <div class="col-md-2">
