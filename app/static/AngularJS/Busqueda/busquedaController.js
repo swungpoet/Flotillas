@@ -8,6 +8,12 @@
     $scope.placa = '';
     $scope.longitud = '';
     $scope.latitud = '';
+    $scope.vins = [];
+    $scope.datos = '';
+    $scope.marcadores = [];
+    $scope.markers = [];
+    $scope.dat = [];
+    $scope.vines = [];
 
     //Grupo de funciones de inicio
     $scope.init = function () {
@@ -76,12 +82,14 @@
         }
     };
 
+
     //Succes obtiene lista de objetos de las flotillas
     var getFlotillaSuccessCallback = function (data, status, headers, config) {
 
         //regreso el objeto a su estado original
         $('#btnBuscar').button('reset');
         $rootScope.listaUnidades = data;
+        
         if ($scope.placa == undefined) {
             $scope.placa = '';
         }
@@ -109,68 +117,173 @@
         location.href = '/unidad';
     }
 
-    //Crear mapa
+    //Crear  mapa
     $scope.buscarGPS = function (vin) {
         var datoVin = $scope.vin;
+        console.log(datoVin);
         busquedaRepository.getGps(vin)
             .success(getGPSSuccessCallback);
 
     }
 
     var getGPSSuccessCallback = function (data, status, headers, config) {
-        console.log('resultado de la Longitud= ', data.longitud, ' latitud', data.latitud)
+        console.log('resultado de la Longitud= ', data.longitud, ' latitud', data.latitud, ' hora', data.fecha)
 
         var lat = data.latitud;
         var long = data.longitud;
+        var fecha = data.fecha;
 
-        console.log(lat, long);
+        //console.log(lat, long, fecha);
 
-        if (lat== 0 && long == 0) {
+        if (lat == 0 && long == 0) {
             alertFactory.error('No existen coordenadas.');
         } else {
-        //var myLatlng2 = new google.maps.LatLng(19.4270245,-99.16766469999999);
-        document.getElementById("map").style.visibility="visible";
-        document.getElementById("btnCerrar").style.visibility="visible";
-        document.getElementById("contenedor").style.visibility="hidden";
-        
+            //var myLatlng2 = new google.maps.LatLng(19.4270245,-99.16766469999999);
+            document.getElementById("map").style.visibility = "visible";
+            document.getElementById("btnCerrar").style.visibility = "visible";
+            document.getElementById("contenedor").style.visibility = "hidden";
 
-        var myLatlng = new google.maps.LatLng(lat, long);
-      
-        //console.log(myLatlng);
-        var myOptions = {
-            center: myLatlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            zoom: 12,
-            panControl: true,
-            zoomControl: true,
-            mapTypeControl: true,
-            scaleControl: true,
-            streetViewControl: true,
-            overviewMapControl: true,
-            rotateControl: true,
+
+            var myLatlng = new google.maps.LatLng(lat, long);
+            var geocoder = new google.maps.Geocoder();
+
+
+            //console.log(myLatlng);
+            var myOptions = {
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                zoom: 12,
+                panControl: true,
+                zoomControl: true,
+                mapTypeControl: true,
+                scaleControl: true,
+                streetViewControl: true,
+                overviewMapControl: true,
+                rotateControl: true
+            };
+
+            var map = new google.maps.Map($("#map").get(0), myOptions);
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map
+            });
+
+
+            geocoder.geocode({
+                'location': myLatlng
+            }, function (results, status) {
+                // si la solicitud fue exitosa
+                if (status === google.maps.GeocoderStatus.OK) {
+                    // si encontró algún resultado.
+                    if (results[1]) {
+                        var address = results[1].formatted_address;
+                    }
+                }
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: fecha + '<br>' + address
+                });
+
+                marker.addListener('mouseover', function () {
+                    infowindow.open(map, marker);
+                });
+
+            });
+
+
         };
-
-        var map = new google.maps.Map($("#map").get(0), myOptions);
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            map: map
-        });
-    }
     };
 
     $scope.cerrarVentana = function () {
-        document.getElementById("btnCerrar").style.visibility="hidden";
-        document.getElementById("map").style.visibility="hidden";
-        document.getElementById("contenedor").style.visibility="visible";
+        document.getElementById("btnCerrar").style.visibility = "hidden";
+        document.getElementById("map").style.visibility = "hidden";
+        document.getElementById("contenedor").style.visibility = "visible";
+        $scope.vins = [];
     }
 
-$scope.verificarCheckbox = function(vin){
-    if($scope.checkstate){
-        console.log($scope.vin)
-       //mande el arreglo[0]
-    }else{
-       //mande el arreglo[1]
+    $scope.IfCheck = function (data, check) {
+        if (check) {
+            $scope.vins.push(data);
+            //console.log($scope.vins);
+        }
+        else {
+            var index = $scope.vins.indexOf(data);
+            $scope.vins.splice(index, 1);
+        }
+    };
+
+    $scope.Ver = function () {
+        $scope.vines = [];
+        $scope.count = 0;
+        var datos = $scope.vins;
+        //console.log("vins", $scope.vins.length);
+        datos.forEach(function (vin, indice, array) {
+            //console.log(vin, indice);
+            busquedaRepository.getGps(vin)
+                .success(getMultiGPSSuccessCallback);
+            //$scope.count ++;
+        });
+
     }
-}
+
+    var getMultiGPSSuccessCallback = function (data, status, headers, config) {
+        $scope.vines.push(data);
+
+        // console.log('resultado de la Longitud= ', data.longitud, ' latitud', data.latitud, ' hora', data.fecha)       
+
+        // console.log( "Count", $scope.count );
+        if ($scope.vins.length === $scope.vines.length) {
+            console.log("vines", $scope.vines);
+
+            var map;
+            var myLatLng = new google.maps.LatLngBounds();
+            var geocoder = new google.maps.Geocoder();
+            var mapOptions = {
+                //center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                zoom: 12,
+                panControl: true,
+                zoomControl: true,
+                mapTypeControl: true,
+                scaleControl: true,
+                streetViewControl: true,
+                overviewMapControl: true,
+                rotateControl: true,
+            };
+            
+
+            // Display a map on the web page
+            map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            map.setTilt(50);
+
+            for (i = 0; i < $scope.vines.length; i++) {
+                // console.log($scope.vines[i], "coordenadas")
+                // console.log($scope.vines[i].longitud);
+                // console.log($scope.vines[i].latitud);
+                var position = new google.maps.LatLng($scope.vines[i].latitud, $scope.vines[i].longitud);
+                myLatLng.extend(position);
+
+                marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: $scope.vines[i].fecha
+                });
+
+                // Center the map to fit all markers on the screen
+                map.fitBounds(myLatLng);
+            }
+
+            
+
+            document.getElementById("map").style.visibility = "visible";
+            document.getElementById("btnCerrar").style.visibility = "visible";
+            document.getElementById("contenedor").style.visibility = "hidden";
+
+
+        }
+    }
+
+
 
 });

@@ -83,11 +83,16 @@
             </div>
         </form>
  -->
+        <div>
+            <label class="col-md-1 control-label">TOTAL</label>
+            <label class="col-md-1 control-label">{{listaUnidades.length}} </label>
+        </div>
 
         <div class="row tablaBusqueda tablaAlign">
             <table class="table table-condensed">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>ID</th>
                         <th>VIN</th>
                         <th>Serie Motor</th>
@@ -103,15 +108,16 @@
                         <th>Info</th>
                         <th>GPS</th>
                         <th>Seleccionar
-                            <input type="checkbox" ng-model="leader">
+                            <!--<input type="checkbox" ng-model="leader" value="unidad.vin" id="status" ng-model="status" class="Form-label-checkbox"  ng-change="IfCheck(unidad.vin,status)">-->
                         </th>
                         <th>
-                            <button type="button" class="btn btn-success pull-right" ng-click="verificarCheckbox()">VER</button>
-                        </th> 
+                            <button type="button" class="btn btn-success pull-right" ng-click="Ver()">VER</button>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="unidad in listaUnidades">
+                        <td>{{$index+1}}</td>
                         <td>{{ unidad.idLicitacion }}</td>
                         <td>{{ unidad.vin }}</td>
                         <td>{{unidad.numeroMotor}}</td>
@@ -143,7 +149,7 @@
                             </button>
                         </td>
                         <td>
-                            <input type="checkbox" id="cbox1" ng-checked="leader" value="{{unidad.vin}}"  ng-model="checkstate" ng-change="verificarCheckbox()">
+                            <input type="checkbox" ng-checked="leader" value="unidad.vin" id="status" ng-model="status" class="Form-label-checkbox" ng-change="IfCheck(unidad.vin,status)">
                         </td>
                     </tr>
                 </tbody>
@@ -151,9 +157,7 @@
         </div>
     </div>
     <div id="contenedor-mapa">
-        <div id="map" style="height: 500px; width: 500px"></div> 
+        <div id="map" style="height: 500px; width: 500px"></div>
         <button class="btn btn-primary" type="button" id="btnCerrar" ng-click="cerrarVentana()">CERRAR</button>
-     </div>
-     
-
+    </div>
 </div>
