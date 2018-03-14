@@ -556,6 +556,82 @@
                         </div>
                         </br>
                     </div>
+                    <!-- Inicia Cambios REXE-->
+                    <div class="form-group row">
+                        <div ng-show="listaDocumentos[55].permiso == 1">
+                            <label for="recibidoPor" class="control-label col-md-2"> Teléfono: </label>
+                            <div class="col-md-2">
+                                <input type="text" ng-model="listaDocumentos[55].valor" class="form-control" ng-blur="Guardar(listaDocumentos[55].idDocumento, listaDocumentos[55].valor)">
+                                <div class="loader">
+                                    <div class="showCtrl" id="loader56"><img src="image/gif/arrows.gif" class="gifLoader" ng-show="listaDocumentos[55].valor != ''"></div>
+                                    <div id="ready56"><span class="glyphicon glyphicon-ok ready" data-toggle="popover" data-original-title="{{listaDocumentos[55].accion}}" data-content="{{listaDocumentos[55].nombreUsuario}} el {{listaDocumentos[55].fechaMod | date:'MM/dd/yyyy hh:mm:ss'}}" ng-hide="listaDocumentos[55].accion == null"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="listaDocumentos[54].permiso == 1">
+                            <label for="recibidoPor" class="control-label col-md-2"> Entregado por: </label>
+                            <div class="col-md-2">
+                                <input type="text" ng-model="listaDocumentos[54].valor" class="form-control" ng-blur="Guardar(listaDocumentos[54].idDocumento, listaDocumentos[54].valor)">
+                                <div class="loader">
+                                    <div class="showCtrl" id="loader55"><img src="image/gif/arrows.gif" class="gifLoader" ng-show="listaDocumentos[54].valor != ''"></div>
+                                    <div id="ready55"><span class="glyphicon glyphicon-ok ready" data-toggle="popover" data-original-title="{{listaDocumentos[54].accion}}" data-content="{{listaDocumentos[54].nombreUsuario}} el {{listaDocumentos[54].fechaMod | date:'MM/dd/yyyy hh:mm:ss'}}" ng-hide="listaDocumentos[54].accion == null"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="listaDocumentos[17].permiso == 1">
+                            <label for="acuseE" class="control-label col-md-2">Acuse de entrega: </label>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-default" ng-click="Cargar(listaDocumentos[17].idDocumento)" ng-hide="listaDocumentos.Verificacion == false" ng-show="listaDocumentos.Verificacion == true">
+                                    <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+                                </button>
+                                <button id="btnDoc18" type="button" ng-class="{ 'oculto': listaDocumentos[17].valor == ''}" class="btn btn-default" ng-click="VerDocumento(listaDocumentos[17].idDocumento,listaDocumentos[17].valor,null)">
+                                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                </button>
+                                <div class="alignArrow">
+                                    <div class="showCtrl" id="loader1"><img src="image/gif/arrows.gif" class="gifLoader"></div>
+                                    <div id="ready1"><span class="glyphicon glyphicon-ok ready" data-toggle="popover" data-original-title="{{listaDocumentos[17].accion}}" data-content="{{listaDocumentos[17].nombreUsuario}} el {{listaDocumentos[17].fechaMod | date:'MM/dd/yyyy hh:mm:ss'}}" ng-hide="listaDocumentos[17].accion == null"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div ng-show="listaDocumentos[56].permiso == 1">
+                            <label for="recibidoPor" class="control-label col-md-2"> Lugar: </label>
+                            <div class="col-md-2">
+                                <input type="text" ng-model="listaDocumentos[56].valor" class="form-control" ng-blur="Guardar(listaDocumentos[56].idDocumento, listaDocumentos[56].valor)">
+                                <div class="loader">
+                                    <div class="showCtrl" id="loader57"><img src="image/gif/arrows.gif" class="gifLoader" ng-show="listaDocumentos[56].valor != ''"></div>
+                                    <div id="ready57"><span class="glyphicon glyphicon-ok ready" data-toggle="popover" data-original-title="{{listaDocumentos[56].accion}}" data-content="{{listaDocumentos[56].nombreUsuario}} el {{listaDocumentos[56].fechaMod | date:'MM/dd/yyyy hh:mm:ss'}}" ng-hide="listaDocumentos[56].accion == null"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="listaDocumentos[57].permiso == 1">
+                            <label for="recibidoPor" class="control-label col-md-2"> N. Licencia: </label>
+                            <div class="col-md-2">
+                                <input type="text" ng-model="listaDocumentos[57].valor" class="form-control" ng-blur="Guardar(listaDocumentos[57].idDocumento, listaDocumentos[57].valor)">
+                                <div class="loader">
+                                    <div class="showCtrl" id="loader58"><img src="image/gif/arrows.gif" class="gifLoader" ng-show="listaDocumentos[57].valor != ''"></div>
+                                    <div id="ready58"><span class="glyphicon glyphicon-ok ready" data-toggle="popover" data-original-title="{{listaDocumentos[57].accion}}" data-content="{{listaDocumentos[57].nombreUsuario}} el {{listaDocumentos[57].fechaMod | date:'MM/dd/yyyy hh:mm:ss'}}" ng-hide="listaDocumentos[57].accion == null"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="listaDocumentos[58].permiso == 1">
+                            <label for="equipamiento" class="control-label col-sm-2">Carga Licencia: </label>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-default" ng-click="Cargar(listaDocumentos[58].idDocumento,listaDocumentos[58].valor)">
+                                    <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+                                </button>
+                                <button id="btnDoc59" type="button" ng-class="{ 'oculto': listaDocumentos[58].valor == ''}" class="btn btn-default" ng-click="showModal(listaDocumentos[58].idDocumento)">
+                                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                </button>
+                                <div class="alignArrow">
+                                    <div class="showCtrl" id="loader1"><img src="image/gif/arrows.gif" class="gifLoader"></div>
+                                    <div id="ready1"><span class="glyphicon glyphicon-ok ready" data-toggle="popover" data-original-title="{{listaDocumentos[58].accion}}" data-content="{{listaDocumentos[58].nombreUsuario}} el {{listaDocumentos[58].fechaMod | date:'MM/dd/yyyy hh:mm:ss'}}" ng-hide="listaDocumentos[58].accion == null"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Termina Cambios REXE-->
                     <div class="form-group">
                         <div ng-show="listaDocumentos[16].permiso == 1">
                             <label for="acuseR" class="control-label col-md-2">Acuse de recibo: </label>
