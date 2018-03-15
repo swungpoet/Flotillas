@@ -525,6 +525,7 @@
                     </div>
                 </form>
             </div>
+            <!-- Inicia Cambios REXE-->
             <div is="entrega" class="container-fluid" ng-show="currentNode.idFase==3">
                 <h4 align="center">Entrega<span class="label label-default">3</span></h4>
                 <hr>
@@ -554,9 +555,23 @@
                                 </div>
                             </div>
                         </div>
+                        <div ng-show="listaDocumentos[16].permiso == 1">
+                            <label for="acuseR" class="control-label col-md-2">Acuse de recibo: </label>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-default" ng-click="Cargar(listaDocumentos[16].idDocumento)" ng-hide="listaDocumentos.Verificacion == false" ng-show="listaDocumentos.Verificacion == true">
+                                    <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+                                </button>
+                                <button id="btnDoc17" type="button" ng-class="{ 'oculto': listaDocumentos[16].valor == ''}" class="btn btn-default" ng-click="VerDocumento(listaDocumentos[16].idDocumento,listaDocumentos[16].valor,null)">
+                                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                </button>
+                                <div class="alignArrow">
+                                    <div class="showCtrl" id="loader1"><img src="image/gif/arrows.gif" class="gifLoader"></div>
+                                    <div id="ready1"><span class="glyphicon glyphicon-ok ready" data-toggle="popover" data-original-title="{{listaDocumentos[16].accion}}" data-content="{{listaDocumentos[16].nombreUsuario}} el {{listaDocumentos[16].fechaMod | date:'MM/dd/yyyy hh:mm:ss'}}" ng-hide="listaDocumentos[16].accion == null"></span></div>
+                                </div>
+                            </div>
+                        </div>
                         </br>
                     </div>
-                    <!-- Inicia Cambios REXE-->
                     <div class="form-group row">
                         <div ng-show="listaDocumentos[55].permiso == 1">
                             <label for="recibidoPor" class="control-label col-md-2"> Teléfono: </label>
@@ -632,40 +647,7 @@
                         </div>
                     </div>
                     <!-- Termina Cambios REXE-->
-                    <div class="form-group">
-                        <div ng-show="listaDocumentos[16].permiso == 1">
-                            <label for="acuseR" class="control-label col-md-2">Acuse de recibo: </label>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-default" ng-click="Cargar(listaDocumentos[16].idDocumento)" ng-hide="listaDocumentos.Verificacion == false" ng-show="listaDocumentos.Verificacion == true">
-                                    <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
-                                </button>
-                                <button id="btnDoc17" type="button" ng-class="{ 'oculto': listaDocumentos[16].valor == ''}" class="btn btn-default" ng-click="VerDocumento(listaDocumentos[16].idDocumento,listaDocumentos[16].valor,null)">
-                                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                                </button>
-                                <div class="alignArrow">
-                                    <div class="showCtrl" id="loader1"><img src="image/gif/arrows.gif" class="gifLoader"></div>
-                                    <div id="ready1"><span class="glyphicon glyphicon-ok ready" data-toggle="popover" data-original-title="{{listaDocumentos[16].accion}}" data-content="{{listaDocumentos[16].nombreUsuario}} el {{listaDocumentos[16].fechaMod | date:'MM/dd/yyyy hh:mm:ss'}}" ng-hide="listaDocumentos[16].accion == null"></span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div ng-show="listaDocumentos[17].permiso == 1">
-                            <label for="acuseE" class="control-label col-md-2">Acuse de entrega: </label>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-default" ng-click="Cargar(listaDocumentos[17].idDocumento)" ng-hide="listaDocumentos.Verificacion == false" ng-show="listaDocumentos.Verificacion == true">
-                                    <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
-                                </button>
-                                <button id="btnDoc18" type="button" ng-class="{ 'oculto': listaDocumentos[17].valor == ''}" class="btn btn-default" ng-click="VerDocumento(listaDocumentos[17].idDocumento,listaDocumentos[17].valor,null)">
-                                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                                </button>
-                                <div class="alignArrow">
-                                    <div class="showCtrl" id="loader1"><img src="image/gif/arrows.gif" class="gifLoader"></div>
-                                    <div id="ready1"><span class="glyphicon glyphicon-ok ready" data-toggle="popover" data-original-title="{{listaDocumentos[17].accion}}" data-content="{{listaDocumentos[17].nombreUsuario}} el {{listaDocumentos[17].fechaMod | date:'MM/dd/yyyy hh:mm:ss'}}" ng-hide="listaDocumentos[17].accion == null"></span></div>
-                                </div>
-                            </div>
-                        </div>
-                        </br>
-                    </div>
-                    <div class="row">
+                    <div style="margin-top: 50px;" class="row">
                         <div class="col-md-3" ng-show="listaDocumentos[26].permiso == 1">
                             <label for="fotoFrente" class="control-label col-md-1"> Frente: </label>
                             <img src="image/car/auto_delantera.jpg" class="autoRectangulo" id='fotoFrente' ng-click="Cargar(listaDocumentos[26].idDocumento)">

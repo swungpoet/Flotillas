@@ -1,7 +1,7 @@
 var global_settings = {
-	urlCORS: 'http://189.204.141.193/FlotillaCartaFacturaApi',
-	uploadPath: 'C:/Produccion/Flotillas/flotillasCartaFactura/flotillav2/flotillasv2/app/uploads/',
-	downloadPath : 'http://189.204.141.193/FlotillaCartaFacturaApi/Documentos/',
+	urlCORS: 'http://192.168.20.71/flotillacartafacturaapi',
+	uploadPath: 'C:\\\\Produccion\\Flotillas\\Documentos\\_Uploads\\',
+	downloadPath : 'http://192.168.20.71/flotillacartafacturaapi/Documentos/',
 	urlGPS:'http://189.204.141.193:4800/GetKilometros/?vin='
 }
 
